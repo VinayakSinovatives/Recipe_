@@ -75,7 +75,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Button (type: 'Continue', label:'Back', onPressed: () {_hideOverlay(overlayEntry);},)
+                  child: Button (type : ButtonType.contin, label:'Back', onPressed: () {_hideOverlay(overlayEntry);},)
                 ),
               ],
             )
@@ -161,7 +161,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
           Positioned(
             bottom: 209, 
             left: MediaQuery.of(context).size.width/2-52, 
-            child: Button (type: 'Continue', label:'Continue', onPressed: () {Navigator.pushNamed(context, homeRoute);},)
+            child: Button (type: ButtonType.contin, label:'Continue', onPressed: () {Navigator.pushNamed(context, homeRoute);},)
           ), 
           Positioned(
             bottom: 300,
@@ -171,17 +171,34 @@ class _KnowTheUserState extends State<KnowTheUser> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  ImageWithText(title:'Japanese', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 1);}), 
-                  ImageWithText(title:'Indian', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 2);}),
-                  ImageWithText(title:'Mediterranean', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 3);}),
-                  ImageWithText(title:'Arabic', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 4);}),
-                  ImageWithText(title:'German', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 5);}),
-                  ImageWithText(title:'Chinese', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 6);}),
-                  ImageWithText(title:'Greek', image: "https://picsum.photos/200/300", onTap: () {_showOverlay(context, 7);}),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇯🇵', image: "https://cdn.media.amplience.net/i/japancentre/Blog-page-156-sushi/Blog-page-156-sushi?\$poi\$&w=556&h=391&sm=c&fmt=auto", onTap: () {_showOverlay(context, 1);}),), 
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇮🇳', image: "https://www.thespruceeats.com/thmb/htgE7CCYS5FaW99oF183gVl7e_Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-639389404-5c450e724cedfd00015b09d5.jpg", onTap: () {_showOverlay(context, 2);}),),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇮🇹', image: "https://www.hotelmousai.com/blog/wp-content/uploads/2021/12/Top-10-Traditional-Foods-in-Italy.jpg", onTap: () {_showOverlay(context, 3);}),),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇸🇦', image: "https://images.yummy.ph/yummy/uploads/2022/05/chickenkabsa.jpg", onTap: () {_showOverlay(context, 4);}),),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇩🇪', image: "https://atasteofabroad.com/wp-content/uploads/2021/06/pretzel-541738_640.jpg", onTap: () {_showOverlay(context, 5);}),),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇨🇳', image: "https://www.recipetineats.com/wp-content/uploads/2023/06/Chili-crisp-noodles_2.jpg?w=747&h=747&crop=1", onTap: () {_showOverlay(context, 6);}),),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇬🇷', image: "https://greecetravelideas.com/wp-content/uploads/2018/08/shutterstock_646209769-min.jpghttps://picsum.photos/200/300", onTap: () {_showOverlay(context, 7);}),),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: ImageWithText(title: '🇲🇽', image: "https://hips.hearstapps.com/hmg-prod/images/gorditas-2-1676665008.jpg", onTap: () {_showOverlay(context, 8);}),)
                 ]
               )
             )
-          )
+          ),
+          Positioned(
+            top: 40, // adjust the position as needed
+            right: 20, // adjust the position as needed
+            child: TextButton(
+              onPressed: () {
+                // Define what happens when the user taps "Skip"
+                // For example, navigate to the next screen
+                Navigator.pushNamed(context, homeRoute);
+              },
+              child: Text(
+                'Skip', style: TextStyle(fontSize: 16, color: Colors.black, decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+
         ]  
       ),
     );

@@ -76,9 +76,9 @@ class _RecipesState extends State<Recipes> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Button(type: 'Redirect', label: 'Save', onPressed: () {_hideReviewOverlay(overlayEntry2);}),
+                        Button(type: ButtonType.redirect, label: 'Save', onPressed: () {_hideReviewOverlay(overlayEntry2);}),
                         const SizedBox(width:28),
-                        Button(type: 'Review', label: 'Cancel', onPressed: () {
+                        Button(type: ButtonType.review, label: 'Cancel', onPressed: () {
                           _hideReviewOverlay(overlayEntry2);
                           rating = prev_rating;
                           })
@@ -145,7 +145,7 @@ class _RecipesState extends State<Recipes> {
                 ),
               ),
               const SizedBox(height:20),
-              Button(type: 'Find', label: 'Find Another Recipe', onPressed: () {Navigator.pushNamed(context, addIngredientsRoute);})
+              Button(type: ButtonType.find, label: 'Find Another Recipe', onPressed: () {Navigator.pushNamed(context, addIngredientsRoute);})
             ],
           ),
         ]  

@@ -97,9 +97,9 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Button(type: 'Redirect', label: 'Save', onPressed: () {_hideReviewOverlay(overlayEntry2);}),
+                        Button(type: ButtonType.redirect, label: 'Save', onPressed: () {_hideReviewOverlay(overlayEntry2);}),
                         const SizedBox(width:28),
-                        Button(type: 'Review', label: 'Cancel', onPressed: () {
+                        Button(type: ButtonType.review, label: 'Cancel', onPressed: () {
                           _hideReviewOverlay(overlayEntry2);
                           rating = prev_rating;
                           })
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                 Positioned(
                   left: 71.0, 
                   bottom: 200.0,
-                  child: Button(type: 'Add', label:'Add', onPressed: () {
+                  child: Button(type: ButtonType.add, label:'Add', onPressed: () {
                     _hideOverlay(overlayEntry1);
                     Navigator.pushNamed(context, addIngredientsRoute);
                     },),
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                 Positioned(
                   right: 67.0, 
                   bottom: 200.0,
-                  child: Button(type: 'Add', label:'Scan', onPressed: () {},),
+                  child: Button(type: ButtonType.add, label:'Scan', onPressed: () {},),
                 ),
               ],
             )
@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   )
                 ),
-                Button (type: 'Add', label:'Add Ingredients', onPressed: () {_showOverlay(context);},),
+                Button (type: ButtonType.add, label:'Add Ingredients', onPressed: () {_showOverlay(context);},),
               ],
             )
           )

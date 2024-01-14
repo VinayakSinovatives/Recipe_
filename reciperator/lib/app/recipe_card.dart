@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:reciperator/app/colors.dart';
 import 'package:reciperator/app/buttons.dart';
 
-// ignore: must_be_immutable
 class RecipeCard extends StatelessWidget {
   RecipeCard({
     super.key,
@@ -11,13 +10,13 @@ class RecipeCard extends StatelessWidget {
     required this.image,
     required this.overlay,
     this.isReview = false,
-    });
+  });
 
-    final String title;
-    final double review;
-    final String image;
-    final VoidCallback overlay;
-    bool isReview;
+  final String title;
+  final double review;
+  final String image;
+  final VoidCallback overlay;
+  final bool isReview;
 
   @override
   Widget build(BuildContext context) {
@@ -34,41 +33,25 @@ class RecipeCard extends StatelessWidget {
       child: Column (
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(9.0),
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              )
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(9.0),
-            child: Text(
-              !isReview ? '$review/5' : 'My Review: $review/5',
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              )
-            ),
-          ), 
-          Container(
-            width: double.infinity,
-            height: 208,
-            child: Image.network(image, fit: BoxFit.cover,),
-          ),
+          // ... existing code ...
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: Button(type: 'Review', label: !isReview ? 'Review' : 'Write Review', onPressed: overlay),
+                child: Button(
+                  type: ButtonType.review, // Using enum value for button type
+                  label: !isReview ? 'Review' : 'Write Review', 
+                  onPressed: overlay
+                ),
               ),
               Padding( 
                 padding: const EdgeInsets.all(4.0),
-                child: Button(type: 'Redirect', label: 'Check it out', onPressed: () {}),
+                child: Button(
+                  type: ButtonType.redirect, // Using enum value for button type
+                  label: 'Check it out', 
+                  onPressed: () {}
+                ),
               ), 
             ],
           )

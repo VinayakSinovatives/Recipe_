@@ -258,7 +258,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         //-----------Some space-----------
                         SizedBox(height: 0.04*h),
                         //-----------Commit changes-----------
-                        Button (type: 'Miltos', label:'Change', onPressed: () async {
+                        Button (type : ButtonType.contin, label:'Change', onPressed: () async {
                           await commitchanges();
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MyProfilePage()));
                         }),
