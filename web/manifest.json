@@ -1,6 +1,6 @@
 {
-    "name": "app_test",
-    "short_name": "app_test",
+    "name": "reciperator",
+    "short_name": "reciperator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

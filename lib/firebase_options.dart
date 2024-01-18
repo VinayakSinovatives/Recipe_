@@ -17,15 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,39 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC-ZCPhKhWlmhm11qgHedQsEozfqLRkq_4',
-    appId: '1:319053524390:web:e01877a78d5e3925c43367',
-    messagingSenderId: '319053524390',
-    projectId: 'ntua-gui-apptest',
-    authDomain: 'ntua-gui-apptest.firebaseapp.com',
-    storageBucket: 'ntua-gui-apptest.appspot.com',
-    measurementId: 'G-ZKW430RGJC',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBN99ylGb5P1FJtXojLJ_lRmHleq-1UTm4',
-    appId: '1:319053524390:android:19e0acb6e205b4b6c43367',
-    messagingSenderId: '319053524390',
-    projectId: 'ntua-gui-apptest',
-    storageBucket: 'ntua-gui-apptest.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCMimr9PYwtTLtC-x5cIGImVHq29FQmeNU',
-    appId: '1:319053524390:ios:223b51f7cac559edc43367',
-    messagingSenderId: '319053524390',
-    projectId: 'ntua-gui-apptest',
-    storageBucket: 'ntua-gui-apptest.appspot.com',
-    iosBundleId: 'com.example.appTest',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCMimr9PYwtTLtC-x5cIGImVHq29FQmeNU',
-    appId: '1:319053524390:ios:8b87842151a76bdac43367',
-    messagingSenderId: '319053524390',
-    projectId: 'ntua-gui-apptest',
-    storageBucket: 'ntua-gui-apptest.appspot.com',
-    iosBundleId: 'com.example.appTest.RunnerTests',
+    apiKey: 'AIzaSyDjyww9nfeBHtHImZ1MGLS3pJ5N5UaclxI',
+    appId: '1:1019351826894:android:678fc7a30532f4b9246b9f',
+    messagingSenderId: '1019351826894',
+    projectId: 'reciperator-app-main',
+    storageBucket: 'reciperator-app-main.appspot.com',
   );
 }

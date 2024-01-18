@@ -41,8 +41,9 @@ class Menu extends StatelessWidget {
               MenuButton(type: 'Home', text: 'Home Page', onTap: () {Navigator.pushNamed(context, homeRoute);}), 
               MenuButton(type: 'Profile', text: 'My Profile', onTap: () {Navigator.pushNamed(context, profileRoute);}),
               MenuButton(type: 'Reviews', text:'My Reviews', onTap: () {Navigator.pushNamed(context, reviewRoute);}), 
-              MenuButton(type: 'MealPlanner', text: 'My Meal Planner', onTap: () {}),
-              MenuButton(type: 'LogOut', text: 'LogOut', onTap: () {})
+              MenuButton(type: 'LogOut', text: 'LogOut', onTap: () {
+                Navigator.pushNamedAndRemoveUntil(context, landing, (r) => false);
+              })
             ],
           )        
         ]

@@ -12,4 +12,5 @@ class AppColors {
   static const title = Color(0xFF6750A4);
   static const card = Color(0xFF141218);
   static const black = Color(0xFF211F26);
+  static const promptBackground = Color(0xFF2B2930);
 }

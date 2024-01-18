@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "319053524390",
-    "project_id": "ntua-gui-apptest",
-    "storage_bucket": "ntua-gui-apptest.appspot.com"
+    "project_number": "1019351826894",
+    "project_id": "reciperator-app-main",
+    "storage_bucket": "reciperator-app-main.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:319053524390:android:19e0acb6e205b4b6c43367",
+        "mobilesdk_app_id": "1:1019351826894:android:c9e47ff1a91e5f85246b9f",
         "android_client_info": {
-          "package_name": "com.example.app_test"
+          "package_name": "com.example.reciperator"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBN99ylGb5P1FJtXojLJ_lRmHleq-1UTm4"
+          "current_key": "AIzaSyDjyww9nfeBHtHImZ1MGLS3pJ5N5UaclxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019351826894:android:678fc7a30532f4b9246b9f",
+        "android_client_info": {
+          "package_name": "com.example.reciperator_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjyww9nfeBHtHImZ1MGLS3pJ5N5UaclxI"
         }
       ],
       "services": {

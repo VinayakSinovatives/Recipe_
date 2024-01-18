@@ -2,31 +2,35 @@ List<String> allImages(int category) {
   switch (category) {
     case 1:
       return [
-        'https://media.istockphoto.com/id/1320922361/photo/woman-taking-tasty-sushi-roll-with-salmon-from-set-at-table-closeup.jpg?s=612x612&w=0&k=20&c=yedOW0jKGjN9H2iGA6MAEIxcc7oVtN-4isL_i74U6Kk=',
-        'https://media.istockphoto.com/id/1184706240/photo/teriyaki-sauce-image-with-chicken-and-broccoli.jpg?s=1024x1024&w=is&k=20&c=N6TQ-cD2cevsNqRLTCq3lEFv-IJZYT0ejGvLBbzCG6o=',
-        'https://media.istockphoto.com/id/673001320/photo/tub-udon-kagawa.jpg?s=612x612&w=0&k=20&c=Pj9viORZHuKzOtIfjpzrYwJvW2z3jvYFzEqxj6p0OBU='
+        'https://ik.imagekit.io/awwybhhmo/satellite_images/japanese/beyondmenu/hero/16.jpg?tr=w-3840,q-50',
+        'https://www.budgetbytes.com/wp-content/uploads/2022/04/Teriyaki-Chicken-plate.jpg',
+        'https://www.justonecookbook.com/wp-content/uploads/2021/10/Kake-Udon-2253-I.jpg'
       ];
     case 2:
       return [
-        'https://media.istockphoto.com/id/1227594550/photo/chicken-curry-creamy-chicken-butter.jpg?s=612x612&w=0&k=20&c=U9SzDx7mjCA5iS1qb8cDUNNkIGD6mJJhwLvEHXL-OlE=',
-        'https://media.istockphoto.com/id/499338620/photo/powder-seasoning-spice-turmeric-on-a-black-stone.jpg?s=612x612&w=0&k=20&c=FLs9dmZr11BNx9cx8KOB9s8555TApOjZSejGq8hHYOc=',
-        'https://media.istockphoto.com/id/467413730/photo/grilled-lamb-chops-organized-on-a-white-plate-on-wood.jpg?s=612x612&w=0&k=20&c=XyYp05pGAQx5FqYV6diCbaC1puKaeAzVOVvQIS845bY='
+        'https://www.allrecipes.com/thmb/ygY1JXP8_IkDSjPPW5VH2dTiMMU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/50347-indian-tandoori-chicken-DDMFS-4x3-3035-205e98c80b2f4275b5bd010c396d9149.jpg',
+        'https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png',
+        'https://www.recipetineats.com/wp-content/uploads/2020/02/Rogan-Josh_4.jpg'
       ];
     case 3:
       return [
-        'https://media.istockphoto.com/id/1276645382/photo/chocolate-assortment-background-top-view-of-different-kinds-of-chocolate.jpg?s=612x612&w=0&k=20&c=VSi2enumIt0aHCKTu4_yzvAFIm7DFGdNXZii0mj9iYs=',
-        'https://media.istockphoto.com/id/1411510281/photo/pecan-apple-and-pumpkin-pies.jpg?s=612x612&w=0&k=20&c=rxkAvSd0yLYqf6Af-YfThdYatXskFCF63gPtvUi3xNU=',
-        'https://media.istockphoto.com/id/96430985/photo/pancakes.jpg?s=612x612&w=0&k=20&c=jB8amkXMUpobVZh9vlx1qJb-qk2oz-jZJIbH0O3wLO4=',
-        'https://media.istockphoto.com/id/1187830875/photo/confectioner-decorating-chocolate-cake-close-up.jpg?s=612x612&w=0&k=20&c=sAUop7R4pohc-Pghb3CqVJnFE44p2phGi47z7pjK4Lc='
+        'https://h3f3k3u6.rocketcdn.me/wp-content/uploads/2022/10/pasta-napoletana-11.jpg',
+        'https://sugarspunrun.com/wp-content/uploads/2021/02/Easy-Risotto-Recipe-1-of-1.jpg',
+        'https://staticcookist.akamaized.net/wp-content/uploads/sites/22/2019/08/pizza.jpg'
       ];
     case 4:
       return [
-        'https://media.istockphoto.com/id/1349480436/photo/homemade-pork-carnitas-tacos.jpg?s=612x612&w=0&k=20&c=CJkpVp7g_qnhW5G0CpjWGLES1SzGE3yu2S8f9KV3jDo=',
-        'https://media.istockphoto.com/id/1203735168/photo/beef-steak-fajitas-with-tortilla-mix-pepper-onion-and-avocado-on-wooden-board.jpg?s=612x612&w=0&k=20&c=nc947rVURaiDpAH2SYUIfeNgH88SfuSD3N0y0DDAOkQ=',
-        'https://media.istockphoto.com/id/984229014/photo/beef-enchiladas-with-tomato-sauce-and-cheese.jpg?s=612x612&w=0&k=20&c=2nYgRIDd--U7Hcegpt5LMFTIFFRQclJ6X23sndPja10=',
-        'https://media.istockphoto.com/id/184816355/photo/stack-of-homemade-flour-tortillas.jpg?s=612x612&w=0&k=20&c=13aZPJFvNRdJT_1vve4V--2bo8B1WCzgM-y749vNvgw='
+        'https://i.ndtvimg.com/i/2016-05/arabic-food_625x350_71463118204.jpg',
+        'https://blog.souqfann.com/wp-content/uploads/2021/09/AnyConv.com__kab.jpg'
       ];
+
     case 5:
+      return [
+        'https://handletheheat.com/wp-content/uploads/2021/09/soft-pretzel-recipe-SQUARE.jpg',
+        'https://www.recipesfromeurope.com/wp-content/uploads/2021/01/german-schnitzel-on-plate.jpg',
+        'https://assets.kro-ncrv.nl/public/styles/banner_square_sm/public/media/images/bier-of-pils.jpeg?h=29ec3e30&itok=GYgprLOU'
+      ];
+    case 7:
       return [
         'https://media.istockphoto.com/id/590602574/photo/greek-moussaka.jpg?s=612x612&w=0&k=20&c=aTzxxmQ6jxBHMbmwxdWBZwsO-ZuCypumrkJF3JxTOUw=',
         'https://media.istockphoto.com/id/1472032975/photo/saganaki-is-a-greek-delicacy-of-fried-cheese.jpg?s=612x612&w=0&k=20&c=d1r4XkyPgeq1zy4tWGONX4trVR1DyZQubN-prZDzu_I=',
@@ -44,11 +48,13 @@ List<String> allImages(int category) {
         'https://media.istockphoto.com/id/1248302421/photo/vegan-falafel-burger-with-vegetables-and-sauce-dark-background-copy-space-healthy-plant-based.jpg?s=612x612&w=0&k=20&c=fakdxpyzuBbJBCznoNFBUoLqxZOl-2eet4K9warRJgg='
       ];
 
-    case 7:
-      return [];
-
     case 8:
-      return [];
+      return [
+        'https://media.istockphoto.com/id/1349480436/photo/homemade-pork-carnitas-tacos.jpg?s=612x612&w=0&k=20&c=CJkpVp7g_qnhW5G0CpjWGLES1SzGE3yu2S8f9KV3jDo=',
+        'https://media.istockphoto.com/id/1203735168/photo/beef-steak-fajitas-with-tortilla-mix-pepper-onion-and-avocado-on-wooden-board.jpg?s=612x612&w=0&k=20&c=nc947rVURaiDpAH2SYUIfeNgH88SfuSD3N0y0DDAOkQ=',
+        'https://media.istockphoto.com/id/984229014/photo/beef-enchiladas-with-tomato-sauce-and-cheese.jpg?s=612x612&w=0&k=20&c=2nYgRIDd--U7Hcegpt5LMFTIFFRQclJ6X23sndPja10=',
+        'https://media.istockphoto.com/id/184816355/photo/stack-of-homemade-flour-tortillas.jpg?s=612x612&w=0&k=20&c=13aZPJFvNRdJT_1vve4V--2bo8B1WCzgM-y749vNvgw='
+      ];
     default:
       return [];
   }

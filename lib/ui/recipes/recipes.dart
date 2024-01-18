@@ -4,24 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:reciperator/app/colors.dart';
 import 'package:reciperator/ui/home/menu.dart';
 import 'package:reciperator/app/recipe_card.dart';
+import 'package:reciperator/app/test_app.dart';
 import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Recipes extends StatefulWidget {
-  const Recipes({super.key});
+  final List<QueryDocumentSnapshot>? results;
+  const Recipes({super.key, required this.results});
 
   @override
   State<Recipes> createState() => _RecipesState();
 }
 
+bool isReviewOverlayVisible = false;
+
 class _RecipesState extends State<Recipes> {
   late OverlayEntry overlayEntry2;
   void _hideReviewOverlay(OverlayEntry overlayEntry2) {
-    overlayEntry2.remove();
+  overlayEntry2.remove();
+  isReviewOverlayVisible = false;
   }
-  double prev_rating = 0.0;
+
   double rating = 0.0;
-  void reviewOverlay (BuildContext context) async{
-    OverlayState? overlayState = Overlay.of(context);
+  double prev_rating = 0.0;
+  void reviewOverlay (BuildContext context, String image, double review, String title, String uid, String link) async{
+    OverlayState? overlayState2 = Overlay.of(context);
 
     overlayEntry2 = OverlayEntry(builder: (context) {
 
@@ -51,7 +59,7 @@ class _RecipesState extends State<Recipes> {
                       ),
                       child: Text('Rate this recipe:',),
                     ),
-                    const SizedBox(height:10),
+                    const SizedBox(height:15),
                     PannableRatingBar(
                       rate: rating,
                       items: List.generate(5, (index) =>
@@ -63,12 +71,13 @@ class _RecipesState extends State<Recipes> {
                             size: 48,
                           ),
                         )),
-                      onHover: (value) { // the rating value is updated on tap or drag.
+                      onChanged: (value) {
+                         // the rating value is updated on tap or drag.
                         setState(() {
                           prev_rating = rating;
                           rating = value;
                           _hideReviewOverlay(overlayEntry2);
-                          reviewOverlay(context);
+                          reviewOverlay(context, image, review, title, uid, link);
                         });
                       },
                     ),
@@ -76,7 +85,12 @@ class _RecipesState extends State<Recipes> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Button(type: ButtonType.redirect, label: 'Save', onPressed: () {_hideReviewOverlay(overlayEntry2);}),
+                        Button(type: ButtonType.redirect, label: 'Save', onPressed: () async {
+                          //Create review and insert it in database
+                          await reviewfun(image, rating, title, uid, link);
+                          _hideReviewOverlay(overlayEntry2);
+                          Navigator.pushNamed(context, reviewRoute);
+                        }),
                         const SizedBox(width:28),
                         Button(type: ButtonType.review, label: 'Cancel', onPressed: () {
                           _hideReviewOverlay(overlayEntry2);
@@ -94,9 +108,45 @@ class _RecipesState extends State<Recipes> {
         
       );
     });
-    overlayState.insertAll([overlayEntry2]); 
+    isReviewOverlayVisible = true;
+    overlayState2.insertAll([overlayEntry2]); 
 
   }
+
+  Future<List<RecipeCard>?> takingresults() async {
+    List<RecipeCard>? toreturn = [];
+    //Checking if a recipe is in user
+    for(QueryDocumentSnapshot document in widget.results!){
+      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      RecipeCard? aux;
+
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('recipes')
+        .where('user_id', isEqualTo: uid)
+        .where('link', isEqualTo: data['link'])
+        .get();
+
+      //If it is in this user
+      if (querySnapshot.docs.isNotEmpty) {
+        for (QueryDocumentSnapshot document in querySnapshot.docs) {
+          Map<String, dynamic> datanew = document.data() as Map<String, dynamic>;
+          aux = RecipeCard(title: datanew['title'], review: datanew['review'].toDouble(), image: datanew['image'],
+             overlay: () {reviewOverlay(context, datanew['image'], datanew['review'].toDouble(), datanew['title'], uid, datanew['link']);}, link: datanew['link'], isReview: datanew['review'].toDouble() > 0 ? true : false);
+          toreturn.add(aux);
+          break;
+        }
+      }
+      else{
+        aux = RecipeCard(title: data['title'], review: (0.0).toDouble(), image: data['image'], 
+            overlay: () {reviewOverlay(context, data['image'], 0, data['title'], uid, data['link']);}, link: data['link'], isReview: false);
+        toreturn.add(aux);
+      }   
+    }
+
+    return toreturn;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(  
@@ -109,46 +159,76 @@ class _RecipesState extends State<Recipes> {
         backgroundColor: AppColors.green,
       ), 
       drawer: const Menu(), 
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient( 
-                begin: Alignment.topCenter, 
-                end: Alignment.bottomCenter,
-                colors: AppColors.background,
-              )
-            )
-          ),
-          Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 700,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left:26, top: 138),
-                        child: Column(
-                          children: [ 
-                            RecipeCard(title: 'Spanish Tortillas', review: 4.0, image: 'https://picsum.photos/200/300', isReview: true, overlay: () {reviewOverlay(context);}),
-                            RecipeCard(title: 'Chocolate Pancakes', review:3.4, image: 'https://picsum.photos/200/300', isReview: true, overlay: () {reviewOverlay(context);}),
-                            RecipeCard(title: 'Chocolate Pancakes', review:3.4, image: 'https://picsum.photos/200/300', isReview: true, overlay: () {reviewOverlay(context);}),
-                
-                          ]
-                        )
-                      )     
-                    ],
+      body: PopScope(
+        canPop: true, 
+        onPopInvoked: (bool didPop) {
+          if (isReviewOverlayVisible) {
+            _hideReviewOverlay(overlayEntry2);
+          }
+        },
+        child: FutureBuilder(
+          future: takingresults(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } 
+            else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } 
+            else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return buildBackground(const Center(
+                child: Text(
+                  'No recipes found.',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
                   )
-                ),
-              ),
-              const SizedBox(height:20),
-              Button(type: ButtonType.find, label: 'Find Another Recipe', onPressed: () {Navigator.pushNamed(context, addIngredientsRoute);})
-            ],
-          ),
-        ]  
+                  )
+                )
+              );
+            } 
+            else {
+              List<Widget> recommendationWidgets = snapshot.data!;
+        
+              return Stack(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient( 
+                        begin: Alignment.topCenter, 
+                        end: Alignment.bottomCenter,
+                        colors: AppColors.background,
+                      )
+                    )
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 700,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left:26, top: 138),
+                                child: Column(
+                                  children: recommendationWidgets
+                                )
+                              )     
+                            ],
+                          )
+                        ),
+                      ),
+                      const SizedBox(height:20),
+                      Button(type:ButtonType.find, label: 'Find Another Recipe', onPressed: () {Navigator.pushNamed(context, addIngredientsRoute);})
+                    ],
+                  ),
+                ]  
+              );
+            }
+          }
+        ),
       ),
     );
   }

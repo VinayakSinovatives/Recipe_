@@ -5,11 +5,11 @@ List<String> allTitles(int category) {
     case 2:
       return ['Tandoori Chicken', 'Curry', 'Lamb'];
     case 3:
-      return ['Spaghetti', 'Risotto'];
+      return ['Spaghetti', 'Risotto', 'Pizza'];
     case 4:
-      return ['Tacos', 'Fajitas', 'Enchilada', 'Tortilla'];
+      return ['Humus', 'Kabsa'];
     case 5:
-      return ['Moussaka', 'Saganaki', 'Tzatziki', 'Gigantes'];
+      return ['Pretzel', 'Schnitzel', 'Bier'];
     case 6:
       return [
         'Chicken',
@@ -21,9 +21,9 @@ List<String> allTitles(int category) {
         'Vegetarian'
       ];
     case 7:
-      return [];
+      return ['Greek Mousaka', 'Saganaki', 'Tzatziki', 'Gigantes'];
     case 8:
-      return [];
+      return ['Tacos', 'Fajitas', 'Enchiladas', 'Flour Tortillas'];
     default:
       return [];
   }

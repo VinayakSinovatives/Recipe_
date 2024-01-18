@@ -8,6 +8,7 @@ import 'package:reciperator/ui/recipes/add_ingredients.dart';
 import 'package:reciperator/ui/recipes/recipes.dart';
 import 'package:flutter/material.dart';
 import 'package:reciperator/routes/router_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings)  {
@@ -27,7 +28,9 @@ class Router {
       case addIngredientsRoute: 
         return MaterialPageRoute(builder: (_) => const AddIngredients());
       case recipesRoute:
-        return MaterialPageRoute(builder: (_) => const Recipes());
+        final List<QueryDocumentSnapshot>? args = settings.arguments as List<QueryDocumentSnapshot>?;
+        final List<QueryDocumentSnapshot> results = args ?? [];
+        return MaterialPageRoute(builder: (_) => Recipes(results : results));
       default: 
         return MaterialPageRoute( 
           builder: (_) => Scaffold (

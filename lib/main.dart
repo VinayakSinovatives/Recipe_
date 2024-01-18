@@ -17,12 +17,14 @@ void main() {
 Future<void> firebaseinitialization() async{
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-      apiKey: 'AIzaSyBN99ylGb5P1FJtXojLJ_lRmHleq-1UTm4',
-      appId: '1:319053524390:android:19e0acb6e205b4b6c43367',
-      messagingSenderId: '319053524390',
-      projectId: 'ntua-gui-apptest',
+      apiKey: 'AIzaSyDjyww9nfeBHtHImZ1MGLS3pJ5N5UaclxI',
+      appId: '1:1019351826894:android:678fc7a30532f4b9246b9f',
+      messagingSenderId: '1019351826894',
+      projectId: 'reciperator-app-main',
+      storageBucket: 'reciperator-app-main.appspot.com',
     ),
   );
 }
+
 
 
