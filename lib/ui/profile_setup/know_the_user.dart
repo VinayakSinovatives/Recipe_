@@ -22,7 +22,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
     overlayEntry1.remove();
   }
 
-  void _showOverlay(BuildContext context, int category) async {
+  void _showOverlay(BuildContext context, int category, List<ImageWithText> helper) async {
     List<String> titles = allTitles(category);
     List<String> images = allImages(category);
     OverlayState? overlayState = Overlay.of(context);
@@ -31,8 +31,8 @@ class _KnowTheUserState extends State<KnowTheUser> {
       return Positioned.fill(
           child: GestureDetector(
               onTap: () {},
-              //the following screen dictates that the screen darkens a bit when the overlay appears
-              //and determines the position of the buttons, according to Figma
+              // the following screen dictates that the screen darkens a bit when the overlay appears
+              // and determines the position of the buttons, according to Figma
               child: Container(
                   color: Colors.black.withOpacity(0.9),
                   width: 249,
@@ -70,13 +70,16 @@ class _KnowTheUserState extends State<KnowTheUser> {
                               ),
                               itemCount: images.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return ImageWithText(
+                                ImageWithText aux = ImageWithText(
                                   title: titles[index],
                                   image: images[index],
                                   onTap: () {},
                                   color: Colors.white,
                                   enableHighlight: true,
+                                  category: category-1, index:index
                                 );
+                                helper.add(aux);
+                                return aux;
                               }),
                         ),
                       ),
@@ -179,7 +182,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://cdn.media.amplience.net/i/japancentre/Blog-page-156-sushi/Blog-page-156-sushi?\$poi\$&w=556&h=391&sm=c&fmt=auto",
                         onTap: () {
-                          _showOverlay(context, 1);
+                          _showOverlay(context, 1, helper);
                         }),
                   ),
                   Padding(
@@ -189,7 +192,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://www.thespruceeats.com/thmb/htgE7CCYS5FaW99oF183gVl7e_Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-639389404-5c450e724cedfd00015b09d5.jpg",
                         onTap: () {
-                          _showOverlay(context, 2);
+                          _showOverlay(context, 2, helper);
                         }),
                   ),
                   Padding(
@@ -199,7 +202,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://www.hotelmousai.com/blog/wp-content/uploads/2021/12/Top-10-Traditional-Foods-in-Italy.jpg",
                         onTap: () {
-                          _showOverlay(context, 3);
+                          _showOverlay(context, 3, helper);
                         }),
                   ),
                   Padding(
@@ -209,7 +212,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://images.yummy.ph/yummy/uploads/2022/05/chickenkabsa.jpg",
                         onTap: () {
-                          _showOverlay(context, 4);
+                          _showOverlay(context, 4, helper);
                         }),
                   ),
                   Padding(
@@ -219,7 +222,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://atasteofabroad.com/wp-content/uploads/2021/06/pretzel-541738_640.jpg",
                         onTap: () {
-                          _showOverlay(context, 5);
+                          _showOverlay(context, 5, helper);
                         }),
                   ),
                   Padding(
@@ -229,7 +232,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://www.recipetineats.com/wp-content/uploads/2023/06/Chili-crisp-noodles_2.jpg?w=747&h=747&crop=1",
                         onTap: () {
-                          _showOverlay(context, 6);
+                          _showOverlay(context, 6, helper);
                         }),
                   ),
                   Padding(
@@ -239,7 +242,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://s3.ivisa.com/website-assets/blog/best-greek-food.webp",
                         onTap: () {
-                          _showOverlay(context, 7);
+                          _showOverlay(context, 7, helper);
                         }),
                   ),
                   Padding(
@@ -249,7 +252,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                         image:
                             "https://hips.hearstapps.com/hmg-prod/images/gorditas-2-1676665008.jpg",
                         onTap: () {
-                          _showOverlay(context, 8);
+                          _showOverlay(context, 8, helper);
                         }),
                   )
                 ]))),
@@ -291,8 +294,10 @@ Future<void> takingdata(List<ImageWithText>? helper) async {
     }
   }
 
-  CollectionReference recipes = FirebaseFirestore.instance.collection('recipes');
-  QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('food').get();
+  CollectionReference recipes =
+      FirebaseFirestore.instance.collection('recipes');
+  QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection('food').get();
   String uid = FirebaseAuth.instance.currentUser!.uid;
   for (String titling in keeper) {
     for (QueryDocumentSnapshot document in querySnapshot.docs) {
