@@ -1,4 +1,3 @@
-//import 'dart:js_interop';
 import 'package:reciperator/routes/router_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:reciperator/app/colors.dart';
@@ -268,6 +267,18 @@ class _HomePageState extends State<HomePage> {
     return recommendations;
   }
 
+  Future<String?> findingname() async {
+    //which user is online
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    if (userSnapshot.exists){
+      Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
+      return userData['login_id'];
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -275,7 +286,23 @@ class _HomePageState extends State<HomePage> {
         key: _scaffoldKey,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Text(widget.title, style: const TextStyle(fontSize: 30)),
+          title: FutureBuilder<String?>(
+            future: findingname(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } 
+              else if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } 
+              else {
+                String? who = snapshot.data!;
+
+                return Text("Welcome, $who!", style: const TextStyle(fontSize: 25));
+              }
+              
+            },
+          ),
           backgroundColor: Colors.transparent,
         ),
         backgroundColor: Colors.transparent,
