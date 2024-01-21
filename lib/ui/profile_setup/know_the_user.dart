@@ -284,6 +284,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
   }
 }
 
+
 Future<void> takingdata(List<ImageWithText>? helper) async {
   //The list which will keep the data
   List<String> keeper;
