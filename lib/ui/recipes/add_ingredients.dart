@@ -37,12 +37,17 @@ class _AddIngredientsState extends State<AddIngredients> {
 
   void _initializeOverlay() {
     _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        bottom: 20,
-        left: 0,
-        right: 0,
-        child: _buildMicWaveBars(),
-      ),
+      builder: (context) => Stack(children: [
+        Container(
+          color: Colors.black.withOpacity(0.9),
+        ),
+        Positioned(
+          bottom: 20,
+          left: 0,
+          right: 0,
+          child: _buildMicWaveBars(),
+        )
+      ]),
     );
   }
 
@@ -56,7 +61,7 @@ class _AddIngredientsState extends State<AddIngredients> {
   }
 
   void _showOverlay() {
-    Overlay.of(context)?.insert(_overlayEntry);
+    Overlay.of(context).insert(_overlayEntry);
   }
 
   void _hideOverlay() {
@@ -185,98 +190,151 @@ class _AddIngredientsState extends State<AddIngredients> {
         ),
         //backgroundColor: Colors.transparent,
         drawer: const Menu(),
-        body: Stack(
-          children: [
-            Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: AppColors.background,
-            ))),
-            Positioned(
-              top: 105,
-              child: Column(
-                children: [
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 80,
-                      child: const Text(
-                        'Insert your available ingredients!',
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
+        body: PopScope(
+            canPop: false,
+            onPopInvoked: (bool didPop) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, homeRoute, (r) => false);
+            },
+            child: Stack(
+              children: [
+                Container(
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: AppColors.background,
+                ))),
+                Positioned(
+                  top: 105,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 80,
+                          child: const Text(
+                            'Insert your available ingredients!',
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.black,
+                            ),
+                          )),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: 330,
+                        height: 231,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children:
+                                List.generate(textControllers!.length, (index) {
+                              return Container(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: CustomTextField(
+                                          controller: textControllers[index],
+                                          focusNode: index ==
+                                                  textControllers.length - 1
+                                              ? textFieldFocusNode
+                                              : null,
+                                          deleted: false,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.close),
+                                        onPressed: () {
+                                          setState(() {
+                                            textControllers.removeAt(index);
+                                          });
+                                        },
+                                      )
+                                    ],
+                                  ));
+                            }),
+                          ),
                         ),
-                      )),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: 330,
-                    height: 231,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children:
-                            List.generate(textControllers.length, (index) {
-                          return Container(
-                            padding: const EdgeInsets.all(8),
-                            child: CustomTextField(
-                                controller: textControllers[index],
-                                focusNode: index == textControllers.length - 1
-                                    ? textFieldFocusNode
-                                    : null,
-                                deleted: false),
-                          );
-                        }),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 70),
-                  Center(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                        Button(
-                            type: ButtonType.write,
-                            label: 'Write',
-                            onPressed: () {
-                              setState(() {
-                                textControllers.add(TextEditingController());
-                                textFieldFocusNode = FocusNode();
-                              });
-                            }),
-                        const SizedBox(width: 34),
-                        Button(
-                            type: ButtonType.speak,
-                            label: 'Voice',
-                            onPressed: () {
-                              _isListening ? stopListening() : startListening();
-                            }),
-                      ])),
-                  const SizedBox(height: 50),
-                  Center(
-                      child: Button(
-                          type: ButtonType.find,
-                          label: 'Find Recipes',
-                          onPressed: () async {
-                            List<String> ingredients = textControllers.map((controller) => controller.text.trim()).toList();
-                            List<QueryDocumentSnapshot>? fetchedRecipes =await webscraping(ingredients);
+                      const SizedBox(height: 70),
+                      Center(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                            Button(
+                                type: ButtonType.write,
+                                label: 'Write',
+                                onPressed: () {
+                                  setState(() {
+                                    textControllers
+                                        .add(TextEditingController());
+                                    textFieldFocusNode = FocusNode();
+                                  });
+                                }),
+                            const SizedBox(width: 34),
+                            Button(
+                                type: ButtonType.speak,
+                                label: 'Voice',
+                                onPressed: () {
+                                  _isListening
+                                      ? stopListening()
+                                      : startListening();
+                                }),
+                          ])),
+                      const SizedBox(height: 50),
+                      Center(
+                          child: Button(
+                              type: ButtonType.find,
+                              label: 'Find Recipes',
+                              onPressed: () async {
+                                List<String> ingredients = textControllers
+                                    .map((controller) => controller.text.trim())
+                                    .where((text) => text.isNotEmpty)
+                                    .toList();
+                                if (ingredients.isEmpty) {
+                                  // Show an error message
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text('Error'),
+                                        content: Text(
+                                            'You must provide ingredients first.'),
+                                        actions: <Widget>[
+                                          ElevatedButton(
+                                            child: Text('OK'),
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  List<QueryDocumentSnapshot>? fetchedRecipes =
+                                      await webscraping(ingredients);
 
-                            if (fetchedRecipes != null && fetchedRecipes.isNotEmpty) {
-                                recipes = fetchedRecipes;
-                                Navigator.of(context).pushNamed(recipesRoute, arguments: recipes,);
-                            } 
-                            else {
-                                recipes = [];
-                              }
-                            
-                          }))
-                ],
-              ),
-            ),
-          ],
-        ));
+                                  if (fetchedRecipes != null &&
+                                      fetchedRecipes.isNotEmpty) {
+                                    recipes = fetchedRecipes;
+                                    Navigator.of(context).pushNamed(
+                                      recipesRoute,
+                                      arguments: recipes,
+                                    );
+                                  } else {
+                                    recipes = [];
+                                  }
+                                }
+                              }))
+                    ],
+                  ),
+                ),
+              ],
+            )));
   }
 
   @override
@@ -284,6 +342,7 @@ class _AddIngredientsState extends State<AddIngredients> {
     textControllers.forEach((controller) => controller.dispose());
     _speech.stop(); // Stop any ongoing speech recognition
     _speech.cancel(); // Cancel any ongoing speech recognition
+    _hideOverlay();
     super.dispose();
   }
 }
