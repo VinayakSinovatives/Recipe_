@@ -120,7 +120,7 @@ class RecipeCard extends StatelessWidget {
                       ),
                     ] 
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 208,
                     child: Image.network(image, fit: BoxFit.cover,),

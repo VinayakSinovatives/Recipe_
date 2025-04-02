@@ -281,9 +281,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: FutureBuilder<String?>(
@@ -310,8 +310,8 @@ class _HomePageState extends State<HomePage> {
         body: PopScope(
           canPop: false,
           onPopInvoked: (bool didPop) {
-            if (_scaffoldKey.currentState?.isDrawerOpen == true) {
-              _scaffoldKey.currentState?.openEndDrawer();
+            if (scaffoldKey.currentState?.isDrawerOpen == true) {
+              scaffoldKey.currentState?.openEndDrawer();
             } else {
               if (isOverlayVisible) {
                 _hideOverlay(overlayEntry1);

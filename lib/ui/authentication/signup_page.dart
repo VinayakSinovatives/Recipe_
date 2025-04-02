@@ -92,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
     //Now we proceed to build the user for the authentication, after the right checks
     const aux = "@reciperator.com";
     String usremail = '$username$aux';
-    UserCredential? userCredential = null;
+    UserCredential? userCredential;
     try {
       userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: usremail, password: psw);

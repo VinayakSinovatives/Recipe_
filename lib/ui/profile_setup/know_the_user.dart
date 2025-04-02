@@ -57,7 +57,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             ),
                           )),
                       Center(
-                        child: Container(
+                        child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: 467,
                           child: GridView.builder(
@@ -174,13 +174,13 @@ class _KnowTheUserState extends State<KnowTheUser> {
                 )),
             Positioned(
                 bottom: 300,
-                child: Container(
+                child: SizedBox(
                     height: 130.0,
                     width: 353.0,
                     child:
                         ListView(scrollDirection: Axis.horizontal, children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇯🇵',
                             image:
@@ -190,7 +190,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇮🇳',
                             image:
@@ -200,7 +200,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇮🇹',
                             image:
@@ -210,7 +210,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇸🇦',
                             image:
@@ -220,7 +220,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇩🇪',
                             image:
@@ -230,7 +230,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇨🇳',
                             image:
@@ -240,7 +240,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇬🇷',
                             image:
@@ -250,7 +250,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                             }),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ImageWithText(
                             title: '🇲🇽',
                             image:
@@ -269,7 +269,7 @@ class _KnowTheUserState extends State<KnowTheUser> {
                   // For example, navigate to the next screen
                   Navigator.pushNamed(context, homeRoute);
                 },
-                child: Text(
+                child: const Text(
                   'Skip',
                   style: TextStyle(
                     fontSize: 16,

@@ -55,7 +55,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
       //If everything is ok, then we navigate to the home screen
       Navigator.pushNamed(context, homeRoute);
     } 
-    on FirebaseAuthException catch (e) {
+    on FirebaseAuthException {
 
       Navigator.pop(context);
       // ignore: use_build_context_synchronously
@@ -119,7 +119,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                         )
                       ),
                       //-----------"Login to find the best recipes!" text-----------
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width-150,
                         child: const Text(
                           "Login to find the best recipes!",

@@ -52,7 +52,7 @@ class _AddIngredientsState extends State<AddIngredients> {
   }
 
   Widget _buildMicWaveBars() {
-    return Center(
+    return const Center(
       child: SpinKitWave(
         color: Colors.blue,
         size: 75.0,
@@ -84,11 +84,11 @@ class _AddIngredientsState extends State<AddIngredients> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Error"),
-          content: Text("Mic is not available"),
+          title: const Text("Error"),
+          content: const Text("Mic is not available"),
           actions: [
             TextButton(
-              child: Text("OK"),
+              child: const Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -143,9 +143,9 @@ class _AddIngredientsState extends State<AddIngredients> {
   List<CustomTextField>? globaller = [];
   CustomTextField adding(int index) {
     CustomTextField aux = CustomTextField(
-      controller: textControllers![index],
+      controller: textControllers[index],
       focusNode:
-          index == textControllers!.length - 1 ? textFieldFocusNode : null,
+          index == textControllers.length - 1 ? textFieldFocusNode : null,
       deleted: false,
     );
     globaller!.add(aux);
@@ -229,7 +229,7 @@ class _AddIngredientsState extends State<AddIngredients> {
                         child: SingleChildScrollView(
                           child: Column(
                             children:
-                                List.generate(textControllers!.length, (index) {
+                                List.generate(textControllers.length, (index) {
                               return Container(
                                   padding: const EdgeInsets.all(8),
                                   child: Row(
@@ -245,7 +245,7 @@ class _AddIngredientsState extends State<AddIngredients> {
                                         ),
                                       ),
                                       IconButton(
-                                        icon: Icon(Icons.close),
+                                        icon: const Icon(Icons.close),
                                         onPressed: () {
                                           setState(() {
                                             textControllers.removeAt(index);
@@ -299,12 +299,12 @@ class _AddIngredientsState extends State<AddIngredients> {
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        title: Text('Error'),
-                                        content: Text(
+                                        title: const Text('Error'),
+                                        content: const Text(
                                             'You must provide ingredients first.'),
                                         actions: <Widget>[
                                           ElevatedButton(
-                                            child: Text('OK'),
+                                            child: const Text('OK'),
                                             onPressed: () {
                                               Navigator.of(context)
                                                   .pop(); // Close the dialog
@@ -339,7 +339,9 @@ class _AddIngredientsState extends State<AddIngredients> {
 
   @override
   void dispose() {
-    textControllers.forEach((controller) => controller.dispose());
+    for (var controller in textControllers) {
+      controller.dispose();
+    }
     _speech.stop(); // Stop any ongoing speech recognition
     _speech.cancel(); // Cancel any ongoing speech recognition
     _hideOverlay();
